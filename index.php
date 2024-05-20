@@ -10,30 +10,7 @@
 
 <body>
     <div class="flex flex-col min-h-[100dvh]">
-        <header class="px-4 lg:px-6 h-14 flex items-center">
-            <a class="flex items-center justify-center" href="#">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                    class="h-6 w-6">
-                    <path d="m8 3 4 8 5-5 5 15H2L8 3z"></path>
-                </svg>
-                <span class="sr-only">Acme Inc</span>
-            </a>
-            <nav class="ml-auto flex gap-4 sm:gap-6">
-                <a class="text-sm font-medium hover:underline underline-offset-4" href="#">
-                    Features
-                </a>
-                <a class="text-sm font-medium hover:underline underline-offset-4" href="#">
-                    Pricing
-                </a>
-                <a class="text-sm font-medium hover:underline underline-offset-4" href="#">
-                    About
-                </a>
-                <a class="text-sm font-medium hover:underline underline-offset-4" href="contact.php">
-                    Contact
-                </a>
-            </nav>
-        </header>
+    <?php include 'header.php'; ?>
         <main class="flex-1">
             <section class="w-full py-6 sm:py-12 md:py-24 lg:py-32 xl:py-48">
                 <div class="container px-4 md:px-6">

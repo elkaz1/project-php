@@ -9,7 +9,7 @@
 </head>
 
 <body>
-
+<?php include 'header.php'; ?>
     <div class="mx-auto max-w-[350px] space-y-6 sm:max-w-[500px] lg:max-w-[700px]">
         <div class="space-y-2 text-center">
             <h1 class="text-3xl font-bold">Sign Up</h1>
@@ -42,7 +42,7 @@
                             for="password">Password</label><input
                             class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
                             type="password" id="password" required="" /></div><button
-                        class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2 w-full"
+                        class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-black text-white hover:bg-primary/90 h-10 px-4 py-2 w-full"
                         type="submit">
                         Sign Up
                     </button>
@@ -83,7 +83,7 @@
                 Apple
             </button></div>
         <div class="mt-4 text-center text-sm">
-            Already have an account?<!-- --> <a class="underline" href="#">
+            Already have an account?<!-- --> <a class="underline" href="login.php">
                 Login
             </a></div>
     </div>

@@ -9,6 +9,7 @@
 </head>
 
 <body>
+    <?php include 'header.php'; ?>
 
     <div class="flex h-screen w-full items-center justify-center px-4 dark:bg-gray-950">
         <div class="rounded-lg border bg-card text-card-foreground shadow-sm w-full max-w-md" data-v0-t="card">
@@ -48,6 +49,10 @@
                     type="submit">
                     Sign In
                 </button>
+                <div class="mt-4 text-center text-sm">
+            Create a new Account?<!-- --> <a class="underline" href="signup.php">
+                Sign Up
+            </a></div>
             </div>
         </div>
     </div>
