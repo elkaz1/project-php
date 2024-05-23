@@ -1,7 +1,5 @@
 import pandas as pd
 import numpy as np
-import seaborn as sns
-import matplotlib.pyplot as plt
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_squared_error
@@ -41,22 +39,16 @@ error = mean_squared_error(y_test, predictions)
 future_X = np.array(data.drop(['Prediction'], axis=1))[-30:]
 future_predictions = model.predict(future_X)
 
-# Plotting
-plt.figure(figsize=(14, 7))
-sns.lineplot(x=data.index, y=data['Price'], label='Actual Prices')
-sns.lineplot(x=data.index[-30:], y=future_predictions, label='Predicted Prices', linestyle='--')
-plt.xlabel('Date')
-plt.ylabel('Price')
-plt.title('Tesla Stock Price Prediction')
-plt.legend()
-plt.savefig('../public/prediction.png')
-
-# Save predictions and error to a JSON file
-output = {
-    'error': error,
-    'predictions': future_predictions.tolist()
+# Prepare data for JSON output
+output_data = {
+    'actual': data['Price'].tolist(),
+    'predicted': future_predictions.tolist(),
+    'dates': data.index.astype(str).tolist(),
+    'error': error
 }
+
+# Save output to JSON file
 with open('../public/prediction.json', 'w') as f:
-    json.dump(output, f)
+    json.dump(output_data, f)
 
 print("Prediction completed and saved.")
