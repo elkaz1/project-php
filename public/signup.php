@@ -83,7 +83,7 @@
                 Apple
             </button></div>
         <div class="mt-4 text-center text-sm">
-            Already have an account?<!-- --> <a class="underline" href="login.php">
+            Already have an account?<!-- --> <a class="underline" href="./public/login.php">
                 Login
             </a></div>
     </div>
