@@ -1,3 +1,43 @@
+<?php
+include("connection.php");
+
+if(isset($_POST['submit'])) {
+    $firstname = $_POST['firstname'];
+    $lastname = $_POST['lastname'];
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+    $hashed_password = password_hash($password, PASSWORD_DEFAULT); // Hash the password
+
+    if(empty($firstname) || empty($lastname) || empty($email) || empty($password)) {
+        echo "All fields should be filled. Either one or many fields are empty.";
+        echo "<br/>";
+        echo "<a href='register.php'>Go back</a>";
+    } else {
+        // Check if email already exists
+        $stmt = $mysqli->prepare("SELECT id FROM users WHERE email = ?");
+        $stmt->bind_param("s", $email);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        if ($result->num_rows > 0) {
+            echo "Email address already exists. Please choose a different one.";
+            echo "<br/>";
+            echo "<a href='register.php'>Go back</a>";
+        } else {
+            // Insert new user
+            $stmt = $mysqli->prepare("INSERT INTO users (firstname, lastname, email, password) VALUES (?, ?, ?, ?)");
+            $stmt->bind_param("ssss", $firstname, $lastname, $email, $hashed_password);
+            
+            if ($stmt->execute()) {
+                // Redirect to login page after successful registration
+                header("Location: login.php");
+                exit();
+            } else {
+                echo "Could not execute the insert query.";
+            }
+            $stmt->close();
+    }
+}}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -19,42 +59,44 @@
         </div>
         <div class="rounded-lg border bg-card text-card-foreground shadow-sm" data-v0-t="card">
             <div class="p-6">
+                <form action="" method="POST"> <!-- Add the form action and method -->
                 <div class="space-y-4">
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div class="space-y-2"><label
                                 class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
                                 for="first-name">First name</label><input
                                 class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-                                id="first-name" placeholder="John" required="" /></div>
+                                id="first-name" placeholder="John" required="" name="firstname" /></div>
                         <div class="space-y-2"><label
                                 class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
                                 for="last-name">Last name</label><input
                                 class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-                                id="last-name" placeholder="Doe" required="" /></div>
+                                id="last-name" placeholder="Doe" required="" name="lastname" /></div>
                     </div>
                     <div class="space-y-2"><label
                             class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
                             for="email">Email</label><input
                             class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-                            type="email" id="email" placeholder="john@example.com" required="" /></div>
+                            type="email" id="email" placeholder="john@example.com" required="" name="email" /></div>
                     <div class="space-y-2"><label
                             class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
                             for="password">Password</label><input
                             class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-                            type="password" id="password" required="" /></div><button
+                            type="password" id="password" required="" name="password" /></div><button
                         class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-black text-white hover:bg-primary/90 h-10 px-4 py-2 w-full"
-                        type="submit">
+                        type="submit" name="submit">
                         Sign Up
                     </button>
                 </div>
+                </form>
             </div>
         </div>
         <p class="text-center text-sm">or sign up with</p>
         <div class="flex flex-col sm:flex-row justify-center space-y-2 sm:space-y-0 sm:space-x-2"><button
                 class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2 w-full sm:w-auto"><svg
                     xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                    class="w-4 h-4 mr-2">
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="
+                    round" class="w-4 h-4 mr-2">
                     <circle cx="12" cy="12" r="10"></circle>
                     <circle cx="12" cy="12" r="4"></circle>
                     <line x1="21.17" x2="12" y1="8" y2="8"></line>
