@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Tesla Stock Prediction</title>
+    <title>Stock Prediction</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         body {
@@ -21,30 +21,46 @@
     </style>
 </head>
 <body>
-    <h1>Tesla Stock Prediction</h1>
-    <form action="test.php" method="post">
-        <button type="submit">Predict Tesla Stock Prices</button>
+    <h1>Stock Prediction</h1>
+    <form action="custom_prediction.php" method="post">
+        <label for="stock_name">Choose a stock:</label>
+        <select id="stock_name" name="stock_name" required>
+            <option value="tesla_stock_data">Tesla</option>
+            <option value="apple">Apple</option>
+            <option value="google">Google</option>
+            <!-- Add more options as needed -->
+        </select>
+        
+        <label for="time_frame">Prediction Time Frame (days):</label>
+        <input type="number" id="time_frame" name="time_frame" value="30" required>
+        <label for="sma_period">SMA Period (days):</label>
+        <input type="number" id="sma_period" name="sma_period" value="30" required>
+        <label for="ema_period">EMA Period (days):</label>
+        <input type="number" id="ema_period" name="ema_period" value="30" required>
+        <button type="submit">Predict Stock Prices</button>
     </form>
 
     <div class="output">
         <?php
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $output = shell_exec('python ../python/test.py 2>&1');
+            $stock_name = $_POST['stock_name'];
+            $time_frame = $_POST['time_frame'];
+            $sma_period = $_POST['sma_period'];
+            $ema_period = $_POST['ema_period'];
+
+            // Pass user inputs to the Python script
+            $output = shell_exec("python ../python/custom_prediction.py $stock_name $time_frame $sma_period $ema_period 2>&1");
             echo "<pre>$output</pre>";
 
             // Load the prediction data
-            $prediction_data = json_decode(file_get_contents('prediction.json'), true);
+            $prediction_data = json_decode(file_get_contents('custom_prediction.json'), true);
             $actual = $prediction_data['actual'];
             $predicted = $prediction_data['predicted'];
             $dates = $prediction_data['dates'];
             $error = $prediction_data['error'];
             $sma = $prediction_data['SMA'];
             $ema = $prediction_data['EMA'];
-            $bollinger_high = $prediction_data['Bollinger_High'];
-            $bollinger_low = $prediction_data['Bollinger_Low'];
-            #$sentiments = $prediction_data['Sentiments'];
-            #$competitor = $prediction_data['Competitor'];
-            $RSI = $prediction_data['RSI'];
+            $rsi = $prediction_data['RSI'];
         ?>
         <h2>Prediction Results</h2>
 
@@ -93,23 +109,61 @@
             });
         </script>
 
-        <!-- Moving Averages Chart -->
-        <canvas id="movingAveragesChart"></canvas>
+        <!-- RSI Chart -->
+        <canvas id="rsiChart"></canvas>
         <script>
-            var ctxMA = document.getElementById('movingAveragesChart').getContext('2d');
-            var movingAveragesChart = new Chart(ctxMA, {
+            var ctxRSI = document.getElementById('rsiChart').getContext('2d');
+            var rsiChart = new Chart(ctxRSI, {
                 type: 'line',
                 data: {
                     labels: <?php echo json_encode($dates); ?>,
                     datasets: [
                         {
-                            label: '30-day SMA',
+                            label: 'RSI',
+                            data: <?php echo json_encode($rsi); ?>,
+                            borderColor: 'rgba(153, 102, 255, 1)',
+                            fill: false
+                        }
+                    ]
+                },
+                options: {
+                    scales: {
+                        x: {
+                            display: true,
+                            title: {
+                                display: true,
+                                text: 'Date'
+                            }
+                        },
+                        y: {
+                            display: true,
+                            title: {
+                                display: true,
+                                text: 'RSI'
+                            }
+                        }
+                    }
+                }
+            });
+        </script>
+
+        <!-- SMA and EMA Chart -->
+        <canvas id="smaEmaChart"></canvas>
+        <script>
+            var ctxSmaEma = document.getElementById('smaEmaChart').getContext('2d');
+            var smaEmaChart = new Chart(ctxSmaEma, {
+                type: 'line',
+                data: {
+                    labels: <?php echo json_encode($dates); ?>,
+                    datasets: [
+                        {
+                            label: 'SMA',
                             data: <?php echo json_encode($sma); ?>,
                             borderColor: 'rgba(54, 162, 235, 1)',
                             fill: false
                         },
                         {
-                            label: '30-day EMA',
+                            label: 'EMA',
                             data: <?php echo json_encode($ema); ?>,
                             borderColor: 'rgba(255, 159, 64, 1)',
                             fill: false
@@ -129,96 +183,13 @@
                             display: true,
                             title: {
                                 display: true,
-                                text: 'Price'
+                                text: 'Value'
                             }
                         }
                     }
                 }
             });
         </script>
-        <!-- Bollinger Bands Chart -->
-        <canvas id="bollingerBandsChart"></canvas>
-        <script>
-            var ctxBB = document.getElementById('bollingerBandsChart').getContext('2d');
-            var bollingerBandsChart = new Chart(ctxBB, {
-                type: 'line',
-                data: {
-                    labels: <?php echo json_encode($dates); ?>,
-                    datasets: [
-                        {
-                            label: 'Bollinger High',
-                            data: <?php echo json_encode($bollinger_high); ?>,
-                            borderColor: 'rgba(75, 192, 192, 1)',
-                            fill: false
-                        },
-                        {
-                            label: 'Bollinger Low',
-                            data: <?php echo json_encode($bollinger_low); ?>,
-                            borderColor: 'rgba(255, 99, 132, 1)',
-                            fill: false
-                        }
-                    ]
-                },
-                options: {
-                    scales: {
-                        x: {
-                            display: true,
-                            title: {
-                                display: true,
-                                text: 'Date'
-                            }
-                        },
-                        y: {
-                            display: true,
-                            title: {
-                                display: true,
-                                text: 'Price'
-                            }
-                        }
-                    }
-                }
-            });
-        </script>
-        <!-- RSI Chart -->
-        <!-- RSI Chart -->
-<canvas id="rsiChart"></canvas>
-<script>
-    var ctxRSI = document.getElementById('rsiChart').getContext('2d');
-    var rsiChart = new Chart(ctxRSI, {
-        type: 'line',
-        data: {
-            labels: <?php echo json_encode($dates); ?>,
-            datasets: [
-                {
-                    label: 'RSI',
-                    data: <?php echo json_encode($prediction_data['RSI']); ?>,
-                    borderColor: 'rgba(75, 192, 192, 1)',
-                    fill: false
-                }
-            ]
-        },
-        options: {
-            scales: {
-                x: {
-                    display: true,
-                    title: {
-                        display: true,
-                        text: 'Date'
-                    }
-                },
-                y: {
-                    display: true,
-                    title: {
-                        display: true,
-                        text: 'RSI'
-                    },
-                    min: 0,
-                    max: 100
-                }
-            }
-        }
-    });
-</script>
 
         <?php
         }
