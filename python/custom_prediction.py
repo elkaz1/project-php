@@ -67,7 +67,29 @@ def calculate_rsi(data, window):
 data['RSI'] = calculate_rsi(data, 14)
 data['RSI'].fillna(50, inplace=True)  # Fill NaN values with 50, indicating a neutral RSI
 
+# Calculate MACD
+def calculate_macd(data, short_window=12, long_window=26, signal_window=9):
+    data['ShortEMA'] = data['Price'].ewm(span=short_window, adjust=False).mean()
+    data['LongEMA'] = data['Price'].ewm(span=long_window, adjust=False).mean()
+    data['MACD'] = data['ShortEMA'] - data['LongEMA']
+    data['Signal Line'] = data['MACD'].ewm(span=signal_window, adjust=False).mean()
+    return data
 
+data = calculate_macd(data)
+
+# Calculate Stochastic Oscillator
+def calculate_stochastic_oscillator(data, window=14):
+    data['L14'] = data['Price'].rolling(window=window).min()
+    data['H14'] = data['Price'].rolling(window=window).max()
+    data['%K'] = (data['Price'] - data['L14']) * 100 / (data['H14'] - data['L14'])
+    data['%D'] = data['%K'].rolling(window=3).mean()
+    return data
+
+data = calculate_stochastic_oscillator(data)
+
+# Handle NaN values
+data['%K'].bfill(inplace=True)
+data['%D'].bfill(inplace=True)
 
 # Prepare data for JSON output
 output_data = {
@@ -79,7 +101,11 @@ output_data = {
     'EMA': data['EMA'].tolist(),
     #'Bollinger_High': data['Bollinger_High'].tolist(),
     #'Bollinger_Low': data['Bollinger_Low'].tolist(),
-    'RSI': data['RSI'].tolist()
+    'RSI': data['RSI'].tolist(),
+    'MACD': data['MACD'].tolist(),
+    'Signal_Line': data['Signal Line'].tolist(),
+    '%K': data['%K'].tolist(),
+    '%D': data['%D'].tolist()
 }
 
 # Save output to JSON file

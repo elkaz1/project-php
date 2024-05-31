@@ -61,6 +61,17 @@
             $sma = $prediction_data['SMA'];
             $ema = $prediction_data['EMA'];
             $rsi = $prediction_data['RSI'];
+            $macd = $prediction_data['MACD'];
+            $signal_line = $prediction_data['Signal_Line'];
+            $k = $prediction_data['%K'];
+            $d = $prediction_data['%D'];
+            $rsi_latest = end($rsi);
+            $buy_sell_signal = 'Hold';
+            if ($rsi_latest < 30) {
+                $buy_sell_signal = 'Buy';
+            } elseif ($rsi_latest > 70) {
+                $buy_sell_signal = 'Sell';
+            }
         ?>
         <h2>Prediction Results</h2>
 
@@ -190,6 +201,97 @@
                 }
             });
         </script>
+        <canvas id="macdChart"></canvas>
+        <script>
+            var ctxMACD = document.getElementById('macdChart').getContext('2d');
+            var macdChart = new Chart(ctxMACD, {
+                type: 'line',
+                data: {
+                    labels: <?php echo json_encode($dates); ?>,
+                    datasets: [
+                        {
+                            label: 'MACD',
+                            data: <?php echo json_encode($macd); ?>,
+                            borderColor: 'rgba(75, 192, 192, 1)',
+                            fill: false
+                        },
+                        {
+                            label: 'Signal Line',
+                            data: <?php echo json_encode($signal_line); ?>,
+                            borderColor: 'rgba(255, 99, 132, 1)',
+                            fill: false
+                        }
+                    ]
+                },
+                options: {
+                    scales: {
+                        x: {
+                            display: true,
+                            title: {
+                                display: true,
+                                text: 'Date'
+                            }
+                        },
+                        y: {
+                            display: true,
+                            title: {
+                                display: true,
+                                text: 'Value'
+                            }
+                        }
+                    }
+                }
+            });
+        </script>
+        <canvas id="stochChart"></canvas>
+        <script>
+            var ctxStoch = document.getElementById('stochChart').getContext('2d');
+            var stochChart = new Chart(ctxStoch, {
+                type: 'line',
+                data: {
+                    labels: <?php echo json_encode($dates); ?>,
+                    datasets: [
+                        {
+                            label: '%K',
+                            data: <?php echo json_encode($k); ?>,
+                            borderColor: 'rgba(75, 192, 192, 1)',
+                            fill: false
+                        },
+                        {
+                            label: '%D',
+                            data: <?php echo json_encode($d); ?>,
+                            borderColor: 'rgba(255, 99, 132, 1)',
+                            fill: false
+                        }
+                    ]
+                },
+                options: {
+                    scales: {
+                        x: {
+                            display: true,
+                            title: {
+                                display: true,
+                                text: 'Date'
+                            }
+                        },
+                        y: {
+                            display: true,
+                            title: {
+                                display: true,
+                                text: 'Value'
+                            }
+                        }
+                    }
+                }
+            });
+            <!-- Buy/Sell Signal -->
+            var buySellSignal = document.createElement('p');
+            buySellSignal.innerHTML = 'Buy/Sell Signal: <?php echo $buy_sell_signal; ?>';
+            document.querySelector('.output').appendChild(buySellSignal);
+
+            
+        </script>
+
 
         <?php
         }
