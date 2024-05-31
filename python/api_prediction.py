@@ -5,7 +5,7 @@ import numpy as np
 from sklearn.linear_model import LinearRegression
 
 def calculate_sma(data, period):
-    return data.rolling(window=period).mean()
+    return data.rolling(window=period, min_periods=1).mean()
 
 def calculate_ema(data, period):
     return data.ewm(span=period, adjust=False).mean()
@@ -14,10 +14,11 @@ def calculate_rsi(data, period=14):
     delta = data.diff()
     gain = (delta.where(delta > 0, 0)).fillna(0)
     loss = (-delta.where(delta < 0, 0)).fillna(0)
-    avg_gain = gain.rolling(window=period).mean()
-    avg_loss = loss.rolling(window=period).mean()
+    avg_gain = gain.rolling(window=period, min_periods=1).mean()
+    avg_loss = loss.rolling(window=period, min_periods=1).mean()
     rs = avg_gain / avg_loss
-    return 100 - (100 / (1 + rs))
+    rsi = 100 - (100 / (1 + rs))
+    return rsi.fillna(0)  # Handle initial NaNs
 
 def calculate_macd(data, short_period=12, long_period=26, signal_period=9):
     short_ema = calculate_ema(data, short_period)
@@ -25,6 +26,14 @@ def calculate_macd(data, short_period=12, long_period=26, signal_period=9):
     macd = short_ema - long_ema
     signal_line = calculate_ema(macd, signal_period)
     return macd, signal_line
+
+def calculate_stochastic_oscillator(data, k_period=14, d_period=3):
+    low_min = data['low'].rolling(window=k_period, min_periods=1).min()
+    high_max = data['high'].rolling(window=k_period, min_periods=1).max()
+    k = 100 * ((data['close'] - low_min) / (high_max - low_min))
+    d = k.rolling(window=d_period, min_periods=1).mean()
+    return k.fillna(0), d.fillna(0)  # Handle initial NaNs
+
 
 # Get parameters from command line arguments
 try:
@@ -59,6 +68,7 @@ df['SMA'] = calculate_sma(df['close'], sma_period)
 df['EMA'] = calculate_ema(df['close'], ema_period)
 df['RSI'] = calculate_rsi(df['close'])
 df['MACD'], df['Signal_Line'] = calculate_macd(df['close'])
+df['%K'], df['%D'] = calculate_stochastic_oscillator(df)
 
 # Prepare data for prediction
 X = np.arange(len(df)).reshape(-1, 1)
@@ -74,7 +84,7 @@ predicted_prices = model.predict(future_X)
 
 # Save the results
 result = {
-    'dates': df.index.strftime('%Y-%m-%d').tolist() + pd.date_range(df.index[-1], periods=time_frame + 1, closed='right').strftime('%Y-%m-%d').tolist(),
+    'dates': df.index.strftime('%Y-%m-%d').tolist(),
     'actual': df['close'].tolist(),
     'predicted': [None] * len(df['close']) + predicted_prices.tolist(),
     'SMA': df['SMA'].tolist(),
@@ -82,8 +92,8 @@ result = {
     'RSI': df['RSI'].tolist(),
     'MACD': df['MACD'].tolist(),
     'Signal_Line': df['Signal_Line'].tolist(),
-    '%K': df['RSI'].tolist(),  # Placeholder for Stochastic %K
-    '%D': df['RSI'].tolist()   # Placeholder for Stochastic %D
+    '%K': df['%K'].tolist(),
+    '%D': df['%D'].tolist()
 }
 
 try:
