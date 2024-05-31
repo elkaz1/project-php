@@ -82,14 +82,14 @@
             const stockDetails = details[0];
 
             // Limit decimals to 5
-            stockDetails.price = parseFloat(stockDetails.price.toFixed(5));
-            stockDetails.marketCap = parseFloat(stockDetails.marketCap.toFixed(5));
-            stockDetails.dayHigh = parseFloat(stockDetails.dayHigh.toFixed(5));
-            stockDetails.dayLow = parseFloat(stockDetails.dayLow.toFixed(5));
-            stockDetails.open = parseFloat(stockDetails.open.toFixed(5));
-            stockDetails.previousClose = parseFloat(stockDetails.previousClose.toFixed(5));
-            stockDetails.eps = parseFloat(stockDetails.eps.toFixed(5));
-            stockDetails.pe = parseFloat(stockDetails.pe.toFixed(5));
+            stockDetails.price = stockDetails.price !== null && stockDetails.price !== undefined ? parseFloat(stockDetails.price.toFixed(5)) : null;
+            stockDetails.marketCap = stockDetails.marketCap !== null && stockDetails.marketCap !== undefined ? parseFloat(stockDetails.marketCap.toFixed(5)) : null;
+            stockDetails.dayHigh = stockDetails.dayHigh !== null && stockDetails.dayHigh !== undefined ? parseFloat(stockDetails.dayHigh.toFixed(5)) : null;
+            stockDetails.dayLow = stockDetails.dayLow !== null && stockDetails.dayLow !== undefined ? parseFloat(stockDetails.dayLow.toFixed(5)) : null;
+            stockDetails.open = stockDetails.open !== null && stockDetails.open !== undefined ? parseFloat(stockDetails.open.toFixed(5)) : null;
+            stockDetails.previousClose = stockDetails.previousClose !== null && stockDetails.previousClose !== undefined ? parseFloat(stockDetails.previousClose.toFixed(5)) : null;
+            stockDetails.eps = stockDetails.eps !== null && stockDetails.eps !== undefined ? parseFloat(stockDetails.eps.toFixed(5)) : null;
+            stockDetails.pe = stockDetails.pe !== null && stockDetails.pe !== undefined ? parseFloat(stockDetails.pe.toFixed(5)) : null;
 
             // Create and populate the HTML structure
             const content = `
