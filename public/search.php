@@ -134,12 +134,7 @@
                     <div id="labels-chart" class="px-2.5" style="height: 350px;"></div>
                     <div class="grid grid-cols-1 items-center border-gray-200 border-t justify-between mt-5 p-4 md:p-6 pt-0">
                         <div class="flex justify-between items-center pt-5">
-                            <button id="dropdownDefaultButton" data-dropdown-toggle="lastDaysdropdown" data-dropdown-placement="bottom" class="text-sm font-medium text-gray-500 hover:text-gray-900 text-center inline-flex items-center" type="button">
-                                Last 7 days
-                                <svg class="w-2.5 m-2.5 ms-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
-                                </svg>
-                            </button>
+                        <button type="button" class="text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 shadow-purple-800/80 shadow-lg">Predict Now</button>
                         </div>
                     </div>
                 </div>
@@ -341,20 +336,27 @@ function formatDate(date) {
     </script>
 </head>
 <body>
-
 <div
   id="cpzbuivsoot"
   class="flex flex-col md:flex-row gap-6 max-w-6xl mx-auto px-4 md:px-6 py-8 bg-white text-gray-900 flex justify-center"
 >
-  <div class=" ">
-    <div class="mb-6 shadow-lg">
-      <input
-        id="searchInput"
-        class="flex h-10 rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 w-full shadow-lg"
-        placeholder="Search for a stock..."
-        oninput="fetchStocks()"
-      />
-    </div>
+  <div>
+  <div class="mb-6 shadow-lg flex">
+  <input
+    id="searchInput"
+    class="flex h-10 rounded-l-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 w-full shadow-lg"
+    placeholder="Search for a stock..."
+  />
+  <button
+    onclick="fetchStocks()"
+    class="h-10 rounded-r-md bg-blue-500 text-white px-4 flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-400 shadow-lg"
+  >
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6">
+      <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+    </svg>
+  </button>
+</div>
+
     <div class="bg-white rounded-lg shadow-lg border border-gray-200 overflow-hidden">
       <div class="divide-y divide-gray-200">
         <div class="px-4 py-3 bg-gray-100 text-sm font-medium text-gray-500">Search Results</div>
@@ -362,11 +364,12 @@ function formatDate(date) {
       </div>
     </div>
   </div>
-  <div class="w-full  md:w-[470px] bg-white rounded-lg shadow-lg border border-gray-200 overflow-hidden w-full md:w-[400px]">
-    <div class="w-full  md:w-[470px] px-4 py-3 bg-gray-100 text-sm font-medium text-gray-500 ">Stock Preview</div>
-    <div class="w-full  md:w-[470px] p-6 space-y-6" id="Preview"></div>
+  <div class="w-full md:w-[470px] bg-white rounded-lg shadow-lg border border-gray-200 overflow-hidden">
+    <div class="w-full md:w-[470px] px-4 py-3 bg-gray-100 text-sm font-medium text-gray-500">Stock Preview</div>
+    <div class="w-full md:w-[470px] p-6 space-y-6 overflow-y-scroll" id="Preview" style="max-height: calc(100vh - 200px);"></div>
   </div>
 </div>
+
 <script src="https://cdn.tailwindcss.com"></script>
 </body>
 
