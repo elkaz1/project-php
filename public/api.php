@@ -24,7 +24,7 @@
 <body>
     <?php include 'header.php'; ?>
     <div class="mx-10">
-        <!-- 
+
         <form action="api.php" method="post" class="max-w-md mx-auto my-4 p-4 bg-gray-100 rounded-lg shadow-lg">
             <div class="mb-4">
                 <label for="stock_name" class="block text-gray-700 font-bold mb-2">Enter a stock symbol:</label>
