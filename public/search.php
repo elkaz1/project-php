@@ -166,7 +166,7 @@
             // Insert the content into the previewDiv
             previewDiv.innerHTML = content;
             // Update the chart with the stock details
-            updateChart(stock.symbol);
+            updateChart(stock.symbol,details[0]);
         } else {
             console.error('No stock details found');
         }
@@ -202,7 +202,7 @@ function formatDate(date) {
         }
 
         // Function to update the chart with the fetched data
-        async function updateChart(symbol) {
+        async function updateChart(symbol,details) {
       const data = await fetchData(symbol);
             data.reverse();
             const dates = data.map(item => item.date.split(' ')[1]); // Extract only the date part
@@ -302,14 +302,14 @@ function formatDate(date) {
 
             // Update sales amount and percentage
             const latestData = data[data.length - 1];
-            const currentPrice = latestData.close; // Assuming 'close' price is the current price
+            const currentPrice = details.price; // Assuming 'close' price is the current price
             const previousPrice = data[data.length - 2].close; // Previous price for comparison
 
             const salesAmountElement = document.getElementById("sales-amount");
             salesAmountElement.textContent = `$${currentPrice.toFixed(2)}`; // Update sales amount
 
             // Update percentage and color based on price change
-            const percentageChange = ((currentPrice - previousPrice) / previousPrice) * 100;
+            const percentageChange = details.changesPercentage;
             const percentageElement = document.getElementById("percentage");
             percentageElement.textContent = `${percentageChange.toFixed(2)}%`; // Update percentage
 
