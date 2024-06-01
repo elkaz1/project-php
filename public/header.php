@@ -12,7 +12,7 @@
 
 <body>
 <header class="px-4 lg:px-6 h-14 flex items-center">
-    <a class="flex items-center justify-center" href="#">
+    <a class="flex items-center justify-center" href="index.php">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="24"

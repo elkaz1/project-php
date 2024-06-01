@@ -5,12 +5,12 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>My Angel Prediction</title>
 </head>
 
 <body>
     <div class="flex flex-col min-h-[100dvh]">
-    <?php include 'header.php'; ?>
+        <?php include 'header.php'; ?>
         <main class="flex-1">
             <section class="w-full py-6 sm:py-12 md:py-24 lg:py-32 xl:py-48">
                 <div class="container px-4 md:px-6">
@@ -18,26 +18,26 @@
                         <div class="flex flex-col justify-center space-y-4">
                             <div class="space-y-2">
                                 <h1 class="text-3xl font-bold tracking-tighter sm:text-5xl xl:text-6xl/none">
-                                    Stock Market Prediction
+                                    Welcome to My Angel Prediction
                                 </h1>
                                 <p
                                     class="max-w-[600px] text-gray-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed dark:text-gray-400">
-                                    Predict the future of the stock market with our AI-powered platform. Sign up now to
+                                    Experience the power of AI predictions for a variety of applications. Sign up now to
                                     get started.
                                 </p>
                             </div>
                             <div class="flex flex-col gap-2 min-[400px]:flex-row">
                                 <a class="inline-flex h-10 items-center justify-center rounded-md bg-gray-900 px-8 text-sm font-medium text-gray-50 shadow transition-colors hover:bg-gray-900/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:pointer-events-none disabled:opacity-50 dark:bg-gray-50 dark:text-gray-900 dark:hover:bg-gray-50/90 dark:focus-visible:ring-gray-300"
-                                    href="#">
+                                    href="signup.php">
                                     Get Started
                                 </a>
-                                <a class="inline-flex h-10 items-center justify-center rounded-md border border-gray-200 border-gray-200 bg-white px-8 text-sm font-medium shadow-sm transition-colors hover:bg-gray-100 hover:text-gray-900 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:pointer-events-none disabled:opacity-50 dark:border-gray-800 dark:border-gray-800 dark:bg-gray-950 dark:hover:bg-gray-800 dark:hover:text-gray-50 dark:focus-visible:ring-gray-300"
-                                    href="#">
+                                <a class="inline-flex h-10 items-center justify-center rounded-md border border-gray-200 bg-white px-8 text-sm font-medium shadow-sm transition-colors hover:bg-gray-100 hover:text-gray-900 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:pointer-events-none disabled:opacity-50 dark:border-gray-800 dark:bg-gray-950 dark:hover:bg-gray-800 dark:hover:text-gray-50 dark:focus-visible:ring-gray-300"
+                                    href="/contact.php">
                                     Contact Sales
                                 </a>
                             </div>
                         </div>
-                        <img src="/placeholder.svg" width="550" height="550" alt="Hero"
+                        <img src="../assets/hero.jpg" width="550" height="550" alt="Hero"
                             class="mx-auto aspect-video overflow-hidden rounded-xl object-cover object-center sm:w-full lg:order-last lg:aspect-square" />
                     </div>
                 </div>
@@ -49,14 +49,13 @@
                             <h2 class="text-3xl font-bold tracking-tighter sm:text-5xl">How it works</h2>
                             <p
                                 class="max-w-[900px] text-gray-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed dark:text-gray-400">
-                                Our AI analyzes historical stock market data, news, and social media sentiment to
-                                predict future stock
-                                prices.
+                                Our AI analyzes various data sources to provide accurate predictions for different use
+                                cases.
                             </p>
                         </div>
                     </div>
                     <div class="mx-auto grid max-w-5xl items-center gap-6 py-12 lg:grid-cols-2 lg:gap-12">
-                        <img src="/placeholder.svg" width="550" height="310" alt="Image"
+                        <img src="../assets/1.jpg" width="550" height="310" alt="Image"
                             class="mx-auto aspect-video overflow-hidden rounded-xl object-cover object-center" />
                         <div class="flex flex-col justify-center space-y-4">
                             <ul class="grid gap-6">
@@ -73,15 +72,15 @@
                                     <div class="grid gap-1">
                                         <h3 class="text-xl font-bold">Real-time Analysis</h3>
                                         <p class="text-sm text-gray-500 dark:text-gray-400">
-                                            Get insights into market trends and stock performance in real-time.
+                                            Get insights and predictions in real-time.
                                         </p>
                                     </div>
                                 </li>
                                 <li>
                                     <div class="grid gap-1">
-                                        <h3 class="text-xl font-bold">Customized Portfolios</h3>
+                                        <h3 class="text-xl font-bold">Customized Solutions</h3>
                                         <p class="text-sm text-gray-500 dark:text-gray-400">
-                                            Build personalized investment portfolios based on the AI's recommendations.
+                                            Build personalized solutions based on our AI's recommendations.
                                         </p>
                                     </div>
                                 </li>
@@ -90,57 +89,24 @@
                     </div>
                 </div>
             </section>
-            <section class="w-full py-12 md:py-24 lg:py-32 bg-gray-100 dark:bg-gray-800">
-                <div class="container grid items-center justify-center gap-6 px-4 text-center md:px-6">
-                    <div class="space-y-3">
-                        <h2 class="text-3xl font-bold tracking-tighter md:text-4xl/tight">
-                            Experience the workflow the best frontend teams love.
-                        </h2>
-                        <p
-                            class="mx-auto max-w-[600px] text-gray-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed dark:text-gray-400">
-                            Let your team focus on shipping features instead of managing infrastructure with automated
-                            CI/CD.
-                        </p>
-                    </div>
-                    <div class="mx-auto w-full max-w-sm space-y-2">
-                        <form class="flex space-x-2">
-                            <input
-                                class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 max-w-lg flex-1"
-                                type="email" placeholder="Enter your email" />
-                            <button
-                                class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2"
-                                type="submit">
-                                Sign Up
-                            </button>
-                        </form>
-                        <p class="text-xs text-gray-500 dark:text-gray-400">
-                            Sign up to get notified when we launch.
-                            <a class="underline underline-offset-2" href="#">
-                                Terms &amp; Conditions
-                            </a>
-                        </p>
-                    </div>
-                </div>
-            </section>
             <section class="w-full py-12 md:py-24 lg:py-32">
                 <div class="container grid items-center gap-6 px-4 md:px-6 lg:grid-cols-2 lg:gap-10">
                     <div class="space-y-2">
                         <h2 class="text-3xl font-bold tracking-tighter md:text-4xl/tight">
-                            Experience the workflow the best frontend teams love.
+                            Experience the workflow the best teams love.
                         </h2>
                         <p
                             class="max-w-[600px] text-gray-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed dark:text-gray-400">
-                            Let your team focus on shipping features instead of managing infrastructure with automated
-                            CI/CD.
+                            Focus on delivering features instead of managing infrastructure with automated solutions.
                         </p>
                     </div>
                     <div class="flex space-x-4 lg:justify-end">
                         <a class="inline-flex h-10 items-center justify-center rounded-md bg-gray-900 px-8 text-sm font-medium text-gray-50 shadow transition-colors hover:bg-gray-900/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-300"
-                            href="#">
+                            href="contact.php">
                             Contact Sales
                         </a>
-                        <a class="inline-flex h-10 items-center justify-center rounded-md border border-gray-200 border-gray-200 bg-white px-8 text-sm font-medium shadow-sm transition-colors hover:bg-gray-100 hover:text-gray-900 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-300"
-                            href="#">
+                        <a class="inline-flex h-10 items-center justify-center rounded-md border border-gray-200 bg-white px-8 text-sm font-medium shadow-sm transition-colors hover:bg-gray-100 hover:text-gray-900 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-300"
+                            href="signup.php">
                             Learn more
                         </a>
                     </div>
@@ -151,35 +117,37 @@
                     <div class="grid gap-10 sm:px-10 md:gap-16 md:grid-cols-2">
                         <div class="space-y-4">
                             <div class="inline-block rounded-lg bg-gray-100 px-3 py-1 text-sm dark:bg-gray-800">
-                                Performance</div>
+                                Enhanced Performance</div>
                             <h2
                                 class="lg:leading-tighter text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl xl:text-[3.4rem] 2xl:text-[3.75rem]">
-                                Traffic spikes should be exciting, not scary.
+                                Seamless User Experience with Optimized Performance
                             </h2>
                             <a class="inline-flex h-9 items-center justify-center rounded-md bg-gray-900 px-4 py-2 text-sm font-medium text-gray-50 shadow transition-colors hover:bg-gray-900/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:pointer-events-none disabled:opacity-50 dark:bg-gray-50 dark:text-gray-900 dark:hover:bg-gray-50/90 dark:focus-visible:ring-gray-300"
-                                href="#">
+                                href="signup.php">
                                 Get Started
                             </a>
                         </div>
                         <div class="flex flex-col items-start space-y-4">
-                            <div class="inline-block rounded-lg bg-gray-100 px-3 py-1 text-sm dark:bg-gray-800">Security
+                            <div class="inline-block rounded-lg bg-gray-100 px-3 py-1 text-sm dark:bg-gray-800">Robust
+                                Security
                             </div>
                             <p class="mx-auto max-w-[700px] text-gray-500 md:text-xl/relaxed dark:text-gray-400">
-                                Fully managed infrastructure designed to scale dynamically with your traffic, a global
-                                edge to ensure
-                                your site is fast for every customer, and the tools to monitor every aspect of your app.
+                                Benefit from our secure infrastructure designed to scale dynamically, ensuring a fast
+                                and reliable experience for every user. Monitor and protect every aspect of your app
+                                with our comprehensive tools.
                             </p>
-                            <a class="inline-flex h-9 items-center justify-center rounded-md border border-gray-200 border-gray-200 bg-white px-4 py-2 text-sm font-medium shadow-sm transition-colors hover:bg-gray-100 hover:text-gray-900 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:pointer-events-none disabled:opacity-50 dark:border-gray-800 dark:border-gray-800 dark:bg-gray-950 dark:hover:bg-gray-800 dark:hover:text-gray-50 dark:focus-visible:ring-gray-300"
-                                href="#">
+                            <a class="inline-flex h-9 items-center justify-center rounded-md border border-gray-200 bg-white px-4 py-2 text-sm font-medium shadow-sm transition-colors hover:bg-gray-100 hover:text-gray-900 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:pointer-events-none disabled:opacity-50 dark:border-gray-800 dark:bg-gray-950 dark:hover:bg-gray-800 dark:hover:text-gray-50 dark:focus-visible:ring-gray-300"
+                                href="signup.php">
                                 Contact Sales
                             </a>
                         </div>
                     </div>
                 </div>
             </section>
+
         </main>
         <footer class="flex flex-col gap-2 sm:flex-row py-6 w-full shrink-0 items-center px-4 md:px-6 border-t">
-            <p class="text-xs text-gray-500 dark:text-gray-400">© 2024 Acme Inc. All rights reserved.</p>
+            <p class="text-xs text-gray-500 dark:text-gray-400">© 2024 My Angel Prediction. All rights reserved.</p>
             <nav class="sm:ml-auto flex gap-4 sm:gap-6">
                 <a class="text-xs hover:underline underline-offset-4" href="#">
                     Terms of Service

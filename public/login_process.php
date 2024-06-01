@@ -22,7 +22,15 @@ if(isset($_POST['submit'])) {
             $_SESSION['valid'] = $row['email'];
             $_SESSION['name'] = $row['firstname'];
             $_SESSION['id'] = $row['id'];
-            header('Location: index.php');
+
+            // Check if user is admin or client
+            if ($row['role'] == '1') {
+                // Redirect admin to dashboard
+                header('Location: dashboard.php');
+            } else {
+                // Redirect client to stocks
+                header('Location: stocks.php');
+            }
             exit();
         } else {
             echo "Invalid email or password.";

@@ -19,7 +19,7 @@ $row = $result->fetch_assoc();
 $stmt->close();
 
 // Check if user is admin
-$is_admin = ($row['role'] === 'admin');
+$is_admin = ($row['role'] == '1');
 
 // Function to update password
 function updatePassword($mysqli, $user_id, $new_password)
@@ -66,8 +66,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <title>User Profile</title>
 </head>
 <body>
-    <?php include 'header.php'; ?>
-
+<div class="flex flex-col w-full min-h-screen">
+        <?php include 'navigation.php'; ?>
     <div class="flex h-screen w-full items-center justify-center px-4 dark:bg-gray-950">
         <div class="rounded-lg border bg-card text-card-foreground shadow-sm w-full max-w-md" data-v0-t="card">
             <div class="flex flex-col p-6 space-y-1 text-center">
