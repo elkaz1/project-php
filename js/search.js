@@ -1,15 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
-<meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible"
-		content="IE=edge">
-<meta name="viewport"
-		content="width=device-width, initial-scale=1.0">
-<title>Document</title>
-<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-<script>
 
     // Your code that interacts with the DOM, including getElementById
     async function fetchStocks(){
@@ -123,11 +112,11 @@
                 <div class="max-w-sm w-full bg-white rounded-lg shadow">
                     <div class="flex justify-between p-4 md:p-6 pb-0">
                         <div>
-                            <h5 id="sales-amount" class="leading-none text-3xl font-bold text-gray-900 pb-2">$12,423</h5>
+                            <h5 id="sales-amount" class="leading-none text-3xl font-bold text-gray-900 pb-2">$00,00</h5>
                             <p class="text-base font-normal text-gray-500">Current Price</p>
                         </div>
                         <div class="flex items-center px-2.5 py-0.5 text-base font-semibold text-green-500 text-center">
-                            <span id="percentage">23%</span>
+                            <span id="percentage">0%</span>
                             <span id="arrow" class="w-3 h-3 ms-1" aria-hidden="true"></span>
                         </div>
                     </div>
@@ -166,7 +155,8 @@
             // Insert the content into the previewDiv
             previewDiv.innerHTML = content;
             // Update the chart with the stock details
-            updateChart(stock.symbol,details[0]);
+            console.log(details[0].symbol);
+            updateChart(details[0]);
         } else {
             console.error('No stock details found');
         }
@@ -184,6 +174,7 @@ function formatDate(date) {
 
         // Function to fetch data from the API
         async function fetchData(symbol) {
+            console.log(symbol);
           // Get today's date
     const today = new Date();
     
@@ -194,7 +185,7 @@ function formatDate(date) {
     // Format dates
     const fromDate = formatDate(yesterday);
     const toDate = formatDate(today);
-
+    console.log(fromDate,toDate);
     // Construct the API URL with dynamic dates
     const response = await fetch(`https://financialmodelingprep.com/api/v3/historical-chart/1hour/${symbol}?from=${fromDate}&to=${toDate}&apikey=81qC7Lodzx8JtrOt85WL7jwjYmT6h3Bf`);
           const data = await response.json();
@@ -202,9 +193,11 @@ function formatDate(date) {
         }
 
         // Function to update the chart with the fetched data
-        async function updateChart(symbol,details) {
-      const data = await fetchData(symbol);
+        async function updateChart(details) {
+      const data = await fetchData(details.symbol);
+            console.log(data);
             data.reverse();
+            
             const dates = data.map(item => item.date.split(' ')[1]); // Extract only the date part
             const Open = data.map(item => item.open); // Example: using 'open' prices for Developer Edition
             const Close = data.map(item => item.close); // Example: using 'close' prices for Designer Edition
@@ -302,8 +295,7 @@ function formatDate(date) {
 
             // Update sales amount and percentage
             const latestData = data[data.length - 1];
-            const currentPrice = details.price; // Assuming 'close' price is the current price
-            const previousPrice = data[data.length - 2].close; // Previous price for comparison
+            const currentPrice = details.price; // Assuming 'close' price is the current price// Previous price for comparison
 
             const salesAmountElement = document.getElementById("sales-amount");
             salesAmountElement.textContent = `$${currentPrice.toFixed(2)}`; // Update sales amount
@@ -332,45 +324,3 @@ function formatDate(date) {
                 arrowElement.innerHTML = `<svg class="w-3 h-3 ms-1 " aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 14"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 1v12m0 0 4-4m-4 4L1 9"/></svg>`;
             }
         }
-
-    </script>
-</head>
-<body>
-<div
-  id="cpzbuivsoot"
-  class="flex flex-col md:flex-row gap-6 max-w-6xl mx-auto px-4 md:px-6 py-8 bg-white text-gray-900 flex justify-center"
->
-  <div>
-  <div class="mb-6 shadow-lg flex">
-  <input
-    id="searchInput"
-    class="flex h-10 rounded-l-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 w-full shadow-lg"
-    placeholder="Search for a stock..."
-  />
-  <button
-    onclick="fetchStocks()"
-    class="h-10 rounded-r-md bg-blue-500 text-white px-4 flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-400 shadow-lg"
-  >
-    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6">
-      <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
-    </svg>
-  </button>
-</div>
-
-    <div class="bg-white rounded-lg shadow-lg border border-gray-200 overflow-hidden">
-      <div class="divide-y divide-gray-200">
-        <div class="px-4 py-3 bg-gray-100 text-sm font-medium text-gray-500">Search Results</div>
-        <div id="results" class="max-h-[400px] overflow-y-auto"></div>
-      </div>
-    </div>
-  </div>
-  <div class="w-full md:w-[470px] bg-white rounded-lg shadow-lg border border-gray-200 overflow-hidden">
-    <div class="w-full md:w-[470px] px-4 py-3 bg-gray-100 text-sm font-medium text-gray-500">Stock Preview</div>
-    <div class="w-full md:w-[470px] p-6 space-y-6 overflow-y-scroll" id="Preview" style="max-height: calc(100vh - 200px);"></div>
-  </div>
-</div>
-
-<script src="https://cdn.tailwindcss.com"></script>
-</body>
-
-</html>
