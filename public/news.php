@@ -29,7 +29,7 @@
         .ticker {
             display: inline-block;
             padding-left: 100%;
-            animation: ticker-animation 15s linear infinite;
+            animation: ticker-animation 50s linear infinite;
         }
         .ticker-item {
             display: inline-block;
@@ -73,25 +73,7 @@
                     </div>
                 </div>
             </div>
-            <div class="ticker-container mt-4">
-                <div class="ticker">
-                    <div class="ticker-item">
-                        <span class="font-bold">AAPL: </span><span class="text-green-500">+2.5%</span>
-                    </div>
-                    <div class="ticker-item">
-                        <span class="font-bold">TSLA: </span><span class="text-red-500">-1.8%</span>
-                    </div>
-                    <div class="ticker-item">
-                        <span class="font-bold">AMZN: </span><span class="text-green-500">+1.2%</span>
-                    </div>
-                    <div class="ticker-item">
-                        <span class="font-bold">GOOGL: </span><span class="text-green-500">+0.9%</span>
-                    </div>
-                    <div class="ticker-item">
-                        <span class="font-bold">MSFT: </span><span class="text-green-500">+1.3%</span>
-                    </div>
-                </div>
-            </div>
+            <!--here-->
         </div>
         <div id="rkfaxuykns" class="w-full lg:w-1/3 grid grid-cols-1 gap-6">
             <div class="gainers-card rounded-lg border bg-card text-card-foreground shadow-lg" data-v0-t="card">
@@ -162,8 +144,15 @@
                     </div>
                 </div>
             </div>
+            
         </div>
+        
     </div>
+    <div class="ticker-container mt-4">
+                <div class="ticker" id="ticker">
+                    
+                </div>
+            </div>
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             const carouselTrack = document.querySelector(".carousel-track");
@@ -208,12 +197,44 @@
                 const prevSlide = currentSlide ? currentSlide.previousElementSibling : null;
                 moveToSlide(carouselTrack, currentSlide, prevSlide || slides[slides.length - 1]);
             });
-
+            fetchActivs()
             fetchNews().then(() => {
         // Automatically move slides every 5 seconds after fetching the news
         setInterval(autoMoveSlides, 5000);
     });
         });
+        async function fetchActivs(){
+            try {
+            const response = await fetch(`https://financialmodelingprep.com/api/v3/stock_market/actives?apikey=81qC7Lodzx8JtrOt85WL7jwjYmT6h3Bf`);
+                const Actives = await response.json();
+                console.log(Actives);  // Add this line to check the response
+                displayActives(Actives);
+            } catch (error) {
+                console.error('Error fetching News:', error);
+                // Optionally, handle the error or show a message to the user
+            }
+        }
+        function displayActives(Actives){
+            const activs = document.getElementById('ticker');
+            activs.innerHTML = '';
+            Actives.forEach(element => {
+                // Check if changesPercentage is positive or negative
+                const isPositive = parseFloat(element.changesPercentage) >= 0;
+
+                // Set the color based on whether it's positive or negative
+                const colorClass = isPositive ? 'text-green-500' : 'text-red-500';
+
+                // Add a plus sign (+) in front of the percentage
+                const formattedPercentage = isPositive ? `▲+${element.changesPercentage}%` : `▼${element.changesPercentage}%`;
+
+                const content = `<div class="ticker-item">
+                    <span class="font-bold">${element.symbol}: </span><span class="${colorClass}">${formattedPercentage}</span>
+                </div>`;
+                
+                activs.innerHTML += content;
+            });
+
+        }
 
         async function fetchNews(){
             try {
