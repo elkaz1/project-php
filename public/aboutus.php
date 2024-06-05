@@ -4,8 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Us - My Angel Prediction</title>
+    <title>About Us - InvestIQ</title>
     <link rel="stylesheet" href="https://cdn.tailwindcss.com">
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
 <body>
@@ -21,7 +22,7 @@
                                 About Us
                             </h1>
                             <p class="max-w-[700px] mx-auto text-gray-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed dark:text-gray-400">
-                                At My Angel Prediction, we are driven by a passion for innovation and a commitment to excellence. Our mission is to empower our clients with cutting-edge solutions that drive success. Through collaboration, creativity, and a steadfast dedication to quality, we build long-term relationships grounded in trust and integrity.
+                                At InvestIQ, we are driven by a passion for innovation and a commitment to excellence. Our mission is to empower our clients with cutting-edge solutions that drive success. Through collaboration, creativity, and a steadfast dedication to quality, we build long-term relationships grounded in trust and integrity.
                             </p>
                         </div>
                     </div>
@@ -71,7 +72,7 @@
         </main>
 
         <footer class="flex flex-col gap-2 sm:flex-row py-6 w-full shrink-0 items-center px-4 md:px-6 border-t">
-            <p class="text-xs text-gray-500 dark:text-gray-400">© 2024 My Angel Prediction. All rights reserved.</p>
+            <p class="text-xs text-gray-500 dark:text-gray-400">© 2024 InvestIQ. All rights reserved.</p>
             <nav class="sm:ml-auto flex gap-4 sm:gap-6">
                 <a class="text-xs hover:underline underline-offset-4" href="#">
                     Terms of Service
@@ -82,7 +83,7 @@
             </nav>
         </footer>
     </div>
-    <script src="https://cdn.tailwindcss.com"></script>
+    
 </body>
 
 </html>

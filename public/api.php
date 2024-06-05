@@ -25,35 +25,8 @@
     <?php include 'header.php'; ?>
     <div class="mx-10">
 
-        <form action="api.php" method="post" class="max-w-md mx-auto my-4 p-4 bg-gray-100 rounded-lg shadow-lg">
-            <div class="mb-4">
-                <label for="stock_name" class="block text-gray-700 font-bold mb-2">Enter a stock symbol:</label>
-                <input type="text" id="stock_name" name="stock_name" required
-                    class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-            </div>
-            <div class="mb-4">
-                <label for="time_frame" class="block text-gray-700 font-bold mb-2">Prediction Time Frame (days):</label>
-                <input type="number" id="time_frame" name="time_frame" value="30" required
-                    class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-            </div>
-            <div class="mb-4">
-                <label for="sma_period" class="block text-gray-700 font-bold mb-2">SMA Period (days):</label>
-                <input type="number" id="sma_period" name="sma_period" value="30" required
-                    class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-            </div>
-            <div class="mb-4">
-                <label for="ema_period" class="block text-gray-700 font-bold mb-2">EMA Period (days):</label>
-                <input type="number" id="ema_period" name="ema_period" value="30" required
-                    class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-            </div>
-            <div class="text-center">
-                <button type="submit"
-                    class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
-                    Predict Stock Prices
-                </button>
-            </div>
-        </form>
-        -->
+
+
 
         <div class="m-5 sm:m-10">
 

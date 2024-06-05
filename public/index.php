@@ -5,20 +5,21 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Angel Prediction</title>
+    <title>InvestIQ</title>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
 <body>
     <div class="flex flex-col min-h-[100dvh]">
         <?php include 'header.php'; ?>
         <main class="flex-1">
-            <section class="w-full py-6 sm:py-12 md:py-24 lg:py-32 xl:py-48">
+            <section class="w-full py-6 sm:py-12 md:py-24 lg:py-32 xl:py-8">
                 <div class="container px-4 md:px-6">
                     <div class="grid gap-6 lg:grid-cols-[1fr_400px] lg:gap-12 xl:grid-cols-[1fr_600px]">
                         <div class="flex flex-col justify-center space-y-4">
                             <div class="space-y-2">
                                 <h1 class="text-3xl font-bold tracking-tighter sm:text-5xl xl:text-6xl/none">
-                                    Welcome to My Angel Prediction
+                                    Welcome to InvestIQ
                                 </h1>
                                 <p
                                     class="max-w-[600px] text-gray-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed dark:text-gray-400">
@@ -147,7 +148,7 @@
 
         </main>
         <footer class="flex flex-col gap-2 sm:flex-row py-6 w-full shrink-0 items-center px-4 md:px-6 border-t">
-            <p class="text-xs text-gray-500 dark:text-gray-400">© 2024 My Angel Prediction. All rights reserved.</p>
+            <p class="text-xs text-gray-500 dark:text-gray-400">© 2024 InvestIQ. All rights reserved.</p>
             <nav class="sm:ml-auto flex gap-4 sm:gap-6">
                 <a class="text-xs hover:underline underline-offset-4" href="#">
                     Terms of Service
@@ -159,7 +160,7 @@
         </footer>
     </div>
 
-    <script src="https://cdn.tailwindcss.com"></script>
+    
 </body>
 
 </html>

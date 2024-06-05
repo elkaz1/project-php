@@ -40,6 +40,7 @@ if (!$result_tickets) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Tickets</title>
     <link rel="stylesheet" href="https://cdn.tailwindcss.com">
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
 <body>
@@ -114,7 +115,7 @@ if (!$result_tickets) {
         </main>
     </div>
 
-    <script src="https://cdn.tailwindcss.com"></script>
+
 </body>
 
 </html>
