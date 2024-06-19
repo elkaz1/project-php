@@ -18,13 +18,163 @@
         .output {
             margin-top: 20px;
         }
+        
+        /* New spinner styles */
+.spinner {
+    display: none;
+    position: absolute;
+    width: 9px;
+    height: 9px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.spinner div {
+    position: absolute;
+    width: 50%;
+    height: 150%;
+    background: #000000;
+    transform: rotate(calc(var(--rotation) * 1deg)) translate(0, calc(var(--translation) * 1%));
+    animation: spinner-fzua35 1s calc(var(--delay) * 1s) infinite ease;
+}
+
+.spinner div:nth-child(1) {
+    --delay: 0.1;
+    --rotation: 36;
+    --translation: 150;
+}
+
+.spinner div:nth-child(2) {
+    --delay: 0.2;
+    --rotation: 72;
+    --translation: 150;
+}
+
+.spinner div:nth-child(3) {
+    --delay: 0.3;
+    --rotation: 108;
+    --translation: 150;
+}
+
+.spinner div:nth-child(4) {
+    --delay: 0.4;
+    --rotation: 144;
+    --translation: 150;
+}
+
+.spinner div:nth-child(5) {
+    --delay: 0.5;
+    --rotation: 180;
+    --translation: 150;
+}
+
+.spinner div:nth-child(6) {
+    --delay: 0.6;
+    --rotation: 216;
+    --translation: 150;
+}
+
+.spinner div:nth-child(7) {
+    --delay: 0.7;
+    --rotation: 252;
+    --translation: 150;
+}
+
+.spinner div:nth-child(8) {
+    --delay: 0.8;
+    --rotation: 288;
+    --translation: 150;
+}
+
+.spinner div:nth-child(9) {
+    --delay: 0.9;
+    --rotation: 324;
+    --translation: 150;
+}
+
+.spinner div:nth-child(10) {
+    --delay: 1;
+    --rotation: 360;
+    --translation: 150;
+}
+
+@keyframes spinner-fzua35 {
+    0%, 10%, 20%, 30%, 50%, 60%, 70%, 80%, 90%, 100% {
+        transform: rotate(calc(var(--rotation) * 1deg)) translate(0, calc(var(--translation) * 1%));
+    }
+
+    50% {
+        transform: rotate(calc(var(--rotation) * 1deg)) translate(0, calc(var(--translation) * 1.5%));
+    }
+}
+
+@-webkit-keyframes spin {
+    0% { -webkit-transform: rotate(0deg); }
+    100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Overlay styles */
+.overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+}
+
     </style>
+<script>
+    function showLoader() {
+        document.getElementById("loader").style.display = "block";
+        document.getElementById("overlay").style.display = "block";
+        document.querySelector(".spinner").style.display = "block";
+    }
+
+    document.addEventListener("DOMContentLoaded", function() {
+        const form = document.querySelector("form");
+        const loader = document.getElementById("loader");
+        const overlay = document.getElementById("overlay");
+        const spinner = document.querySelector(".spinner");
+
+        <?php if ($_SERVER['REQUEST_METHOD'] === 'POST') : ?>
+            loader.style.display = "none";
+            overlay.style.display = "none";
+            spinner.style.display = "none";
+        <?php endif; ?>
+    });
+</script>
+
+
 </head>
 
 <body>
     <?php include 'header.php'; ?>
     <div class="mx-10">
 
+    <div class="overlay" id="overlay">
+        <div class="loader" id="loader"></div>
+        <div class="spinner">
+  <div></div>   
+  <div></div>    
+  <div></div>    
+  <div></div>    
+  <div></div>    
+  <div></div>    
+  <div></div>    
+  <div></div>    
+  <div></div>    
+  <div></div>    
+</div>
+    </div>
 
 
 
@@ -32,7 +182,7 @@
 
             <div class="flex flex-col">
                 <div class="rounded-xl border border-gray-200 bg-white p-6 shadow-lg">
-                    <form action="api.php" method="post">
+                    <form action="prediction.php" method="post" onsubmit="showLoader()">
                         <div class="relative mb-10 w-full flex  items-center justify-between rounded-md">
                             <svg class="absolute left-2 block h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg"
                                 width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -99,6 +249,7 @@
                 $api_url = "https://financialmodelingprep.com/api/v3/historical-price-full/$stock_name?apikey=$api_key";
                 $response = file_get_contents($api_url);
                 $stock_data = json_decode($response, true);
+
 
                 if ($stock_data && isset($stock_data['historical'])) {
                     // Save the stock data to a JSON file

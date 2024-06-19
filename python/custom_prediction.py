@@ -91,6 +91,9 @@ data = calculate_stochastic_oscillator(data)
 data['%K'].bfill(inplace=True)
 data['%D'].bfill(inplace=True)
 
+# calculate the volume 
+
+
 # Prepare data for JSON output
 output_data = {
     'actual': data['Price'].tolist(),
