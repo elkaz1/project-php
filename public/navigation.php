@@ -49,9 +49,9 @@ $is_admin = ($row['role'] == '1');
             <a class="font-medium hover:underline" href="admin_users.php" rel="ugc">Users</a>
             <a class="font-medium hover:underline" href="admin_tickets.php" rel="ugc">Tickets</a>
         <?php } else { ?>
-            <a class="font-medium hover:underline" href="/stocks" rel="ugc">Stocks Predicts</a>
+            <a class="font-medium hover:underline" href="prediction.php" rel="ugc">Stocks Predicts</a>
         <?php } ?>
-        <a class="font-medium hover:underline" href="/settings" rel="ugc">Settings</a>
+        <a class="font-medium hover:underline" href="dash.php" rel="ugc">Stocks</a>
     </nav>
     <div class="ml-auto flex items-center gap-4 relative">
         <button
