@@ -49,7 +49,7 @@ setInterval(autoMoveSlides, 5000);
 });
 async function fetchActivs(){
     try {
-    const response = await fetch(`https://financialmodelingprep.com/api/v3/stock_market/actives?apikey=81qC7Lodzx8JtrOt85WL7jwjYmT6h3Bf`);
+    const response = await fetch(`https://financialmodelingprep.com/api/v3/stock_market/actives?apikey=6fPRdhwBHTpkm3FjMWPGuOM05S1a2m6x`);
         const Actives = await response.json();
         console.log(Actives);  // Add this line to check the response
         displayActives(Actives);
@@ -72,7 +72,7 @@ function displayActives(Actives){
         const formattedPercentage = isPositive ? `▲+${element.changesPercentage}%` : `▼${element.changesPercentage}%`;
 
         const content = `<div class="ticker-item">
-            <span class="font-bold">${element.symbol}: </span><span class="${colorClass}">${formattedPercentage}</span>
+            <button onclick="profilemodel('${element.symbol}')" data-modal-target="Cprofile-modal" data-modal-toggle="Cprofile-modal" ><span class="font-bold">${element.symbol}: </span></button><span class="${colorClass}">${formattedPercentage}</span>
         </div>`;
         
         activs.innerHTML += content;
@@ -82,7 +82,7 @@ function displayActives(Actives){
 
 async function fetchNews(){
     try {
-        const response = await fetch(`https://financialmodelingprep.com/api/v3/fmp/articles?page=0&size=15&apikey=81qC7Lodzx8JtrOt85WL7jwjYmT6h3Bf`);
+        const response = await fetch(`https://financialmodelingprep.com/api/v3/fmp/articles?page=0&size=15&apikey=6fPRdhwBHTpkm3FjMWPGuOM05S1a2m6x`);
         const News = await response.json();
         console.log(News);  // Add this line to check the response
         displayNews(News);
@@ -132,3 +132,171 @@ slide.style.left = `${slideWidth * index}px`;
 slides[0].classList.add("current-slide");
 }
 
+async function profilemodel(symbol) {
+    console.log(symbol);
+    const profileContainer = document.getElementById('profile');
+    profileContainer.innerHTML = '';
+
+    try {
+        const response = await fetch(`https://financialmodelingprep.com/api/v3/profile/${symbol}?apikey=6fPRdhwBHTpkm3FjMWPGuOM05S1a2m6x`);
+        const profileData = await response.json();
+        const profile = profileData[0];
+
+        console.log(profile);
+
+        const content = `
+    <div class="flex items-center gap-4">
+        <img
+            src="${profile.image}"
+            alt="${profile.companyName} Logo"
+            width="48"
+            height="48"
+            class="rounded-full object-cover"
+        />
+        <div>
+            <h1 class="text-2xl font-semibold">${profile.companyName} (${profile.symbol})</h1>
+            <p class="text-gray-500">${profile.industry}</p>
+        </div>
+    </div>
+    <div class="text-right">
+        <div class="text-3xl font-bold">$${profile.price}</div>
+        <div class="text-gray-500">
+            <span class="font-medium text-${profile.changes > 0 ? 'green-500' : 'red-500'}">${profile.changes}%</span> (Last 24h)
+        </div>
+    </div>
+</div>
+
+<div class="grid grid-cols-2 gap-6 mb-6">
+    <div class="space-y-2">
+        <div class="flex justify-between">
+            <span class="text-gray-500">Beta</span>
+            <span>${profile.beta}</span>
+        </div>
+        <div class="flex justify-between">
+            <span class="text-gray-500">Trading Volume</span>
+            <span>${profile.volAvg}</span>
+        </div>
+        <div class="flex justify-between">
+            <span class="text-gray-500">Market Cap</span>
+            <span>$${(profile.mktCap / 1e12).toFixed(2)}T</span>
+        </div>
+        <div class="flex justify-between">
+            <span class="text-gray-500">Dividend</span>
+            <span>$${profile.lastDiv}</span>
+        </div>
+        <div class="flex justify-between">
+            <span class="text-gray-500">DCF Diff</span>
+            <span>${profile.dcfDiff}</span>
+        </div>
+        <div class="flex justify-between">
+            <span class="text-gray-500">DCF</span>
+            <span>${profile.dcf}</span>
+        </div>
+    </div>
+    <div class="space-y-2">
+        <div class="flex justify-between">
+            <span class="text-gray-500">52-Week Range</span>
+            <span>${profile.range}</span>
+        </div>
+        <div class="flex justify-between">
+            <span class="text-gray-500">1-Year Change</span>
+            <span class="text-${profile.changes > 0 ? 'green-500' : 'red-500'}">${profile.changes}%</span>
+        </div>
+        <div class="flex justify-between">
+            <span class="text-gray-500">5-Year Change</span>
+            <span class="text-${profile.changes > 0 ? 'green-500' : 'red-500'}">${profile.changes}%</span>
+        </div>
+        <div class="flex justify-between">
+            <span class="text-gray-500">Exchange</span>
+            <span>${profile.exchange}</span>
+        </div>
+        <div class="flex justify-between">
+            <span class="text-gray-500">IPO Date</span>
+            <span>${profile.ipoDate}</span>
+        </div>
+    </div>
+</div>
+
+<div class="mb-6">
+    <h2 class="text-lg font-semibold mb-2">About ${profile.companyName}</h2>
+    <p class="text-gray-600">
+        ${profile.description}
+    </p>
+</div>
+
+<div class="mb-6">
+    <h2 class="text-lg font-semibold mb-2">Leadership</h2>
+    <div class="flex justify-between">
+        <span class="text-gray-500">CEO</span>
+        <span>${profile.ceo}</span>
+    </div>
+</div>
+
+<div>
+    <h2 class="text-lg font-semibold mb-2">Contact Information</h2>
+    <div class="space-y-2">
+        <div class="flex justify-between">
+            <span class="text-gray-500">Phone</span>
+            <span>${profile.phone}</span>
+        </div>
+        <div class="flex justify-between">
+            <span class="text-gray-500">Address</span>
+            <span>${profile.address}</span>
+        </div>
+        <div class="flex justify-between">
+            <span class="text-gray-500">City</span>
+            <span>${profile.city}</span>
+        </div>
+        <div class="flex justify-between">
+            <span class="text-gray-500">State</span>
+            <span>${profile.state}</span>
+        </div>
+        <div class="flex justify-between">
+            <span class="text-gray-500">ZIP</span>
+            <span>${profile.zip}</span>
+        </div>
+        <div class="flex items-center gap-2">
+            <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="h-4 w-4 text-gray-500"
+            >
+                <circle cx="12" cy="12" r="10"></circle>
+                <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"></path>
+                <path d="M2 12h20"></path>
+            </svg>
+            <a href="${profile.website}" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline">
+                ${profile.website}
+            </a>
+        </div>
+    </div>
+</div>
+`;
+
+
+        profileContainer.innerHTML = content;
+        toggleModal(true);
+    } catch (error) {
+        console.error('Error fetching profile:', error);
+    }
+}
+
+function toggleModal(show) {
+    const modal = document.getElementById('Cprofile-modal');
+    const backdrop = document.getElementById('modal-backdrop');
+
+    if (show) {
+        modal.classList.remove('hidden');
+        backdrop.classList.remove('hidden');
+    } else {
+        modal.classList.add('hidden');
+        backdrop.classList.add('hidden');
+    }
+}

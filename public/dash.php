@@ -8,7 +8,17 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css">
     <style>
-        /* Hide scrollbar for Chrome, Safari and Opera */
+        #Cprofile-modal::-webkit-scrollbar {
+    display: none;
+}
+
+
+        .modal-active {
+            display: flex;
+            justify-content: center;
+            align-items: start;
+        }
+
         #settings-modal::-webkit-scrollbar {
             display: none;
         }
@@ -318,8 +328,7 @@
     <div id="settings-modal" tabindex="-1" aria-hidden="true"
         class="hidden fixed top-[60px] inset-x-0 z-50 flex justify-center items-start overflow-hidden"
         style="-ms-overflow-style: none; scrollbar-width: none;">
-        <div
-            class="bg-white flex flex-col gap-8 w-full max-w-4xl mx-auto p-6 md:p-10 overflow-y-auto max-h-[calc(100vh-80px)]"
+        <div class="bg-white flex flex-col gap-8 w-full max-w-4xl mx-auto p-6 md:p-10 overflow-y-auto max-h-[calc(100vh-80px)]"
             style="background-color: transparent;">
             <div class="grid gap-6">
                 <div class="bg-white rounded-lg border bg-card text-card-foreground shadow-sm" data-v0-t="card">
@@ -462,12 +471,25 @@
         </div>
     </div>
 
+    <!---->
+    <div id="Cprofile-modal" tabindex="-1" aria-hidden="true"
+        class="hidden fixed top-[60px] inset-x-0 z-50 flex justify-center items-start overflow-hidden"
+        style="-ms-overflow-style: none; scrollbar-width: none;">
+        <div class="bg-white flex flex-col gap-8 w-full max-w-4xl mx-auto p-6 md:p-10 overflow-y-auto max-h-[calc(100vh-80px)]"
+            style="background-color: transparent;">
+            <div class="relative rounded-lg border bg-white text-gray-800 shadow-md w-full max-w-3xl mx-auto my-8 p-6"
+                data-v0-t="card">
+                <button onclick="toggleModal(false)"
+                    class="absolute top-2 right-2 text-gray-600 hover:text-gray-800 text-2xl">&times;</button>
+                <div id="profile"></div>
+            </div>
+        </div>
 
-
-
-
+    </div>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
+    <div id="modal-backdrop" class="fixed inset-0 bg-black opacity-50 z-40 hidden"></div>
+
 </body>
 
 </html>
