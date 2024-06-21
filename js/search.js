@@ -123,7 +123,7 @@
                     <div id="labels-chart" class="px-2.5" style="height: 350px;"></div>
                     <div class="grid grid-cols-1 items-center border-gray-200 border-t justify-between mt-5 p-4 md:p-6 pt-0">
                         <div class="flex justify-between items-center pt-5">
-                        <button type="button" class="text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 shadow-purple-800/80 shadow-lg">Predict Now</button>
+                        <button type="button" onclick="submitpred()" class="text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 shadow-purple-800/80 shadow-lg">Predict Now</button>
                         </div>
                     </div>
                 </div>
@@ -150,7 +150,10 @@
                 </div>
             </div>
     </div>`;
-
+            var symbole = stockDetails.symbol;
+            
+            // Store the value in localStorage
+            localStorage.setItem('Csymbol', symbole);
 
             // Insert the content into the previewDiv
             previewDiv.innerHTML = content;
@@ -324,3 +327,8 @@ function formatDate(date) {
                 arrowElement.innerHTML = `<svg class="w-3 h-3 ms-1 " aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 14"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 1v12m0 0 4-4m-4 4L1 9"/></svg>`;
             }
         }
+
+        function submitpred() {
+            window.location.href = 'prediction.php';
+            console.log("working");
+            }

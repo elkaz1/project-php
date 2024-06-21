@@ -133,6 +133,13 @@
 
     </style>
 <script>
+    window.onload = function() {
+        // Get the value from localStorage
+        var value = localStorage.getItem('Csymbol');
+        console.log(value);
+        // Display the value on the page
+        document.getElementById('name').value = value
+    };
     function showLoader() {
         document.getElementById("loader").style.display = "block";
         document.getElementById("overlay").style.display = "block";
