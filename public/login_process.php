@@ -29,7 +29,7 @@ if(isset($_POST['submit'])) {
                 header('Location: dashboard.php');
             } else {
                 // Redirect client to stocks
-                header('Location: stocks.php');
+                header('Location: prediction.php');
             }
             exit();
         } else {
