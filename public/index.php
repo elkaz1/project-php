@@ -11,7 +11,7 @@
 
 <body>
     <div class="flex flex-col min-h-[100dvh]">
-        <?php include 'header.php'; ?>
+        <?php include 'navbar.php'; ?>
         <main class="flex-1">
             <section class="w-full py-6 sm:py-12 md:py-24 lg:py-32 xl:py-8">
                 <div class="container px-4 md:px-6">

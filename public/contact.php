@@ -34,7 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body>
-    <?php include 'header.php'; ?>
+    <?php include 'navbar.php'; ?>
     <div class="flex items-center justify-center h-screen">
         <div class="rounded-lg border bg-card text-card-foreground shadow-sm" data-v0-t="card">
             <div class="p-6">

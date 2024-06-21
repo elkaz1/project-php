@@ -157,7 +157,7 @@
 </head>
 
 <body>
-    <?php include 'header.php'; ?>
+    <?php include 'navbar.php'; ?>
     <div class="mx-10">
 
     <div class="overlay" id="overlay">
@@ -183,18 +183,6 @@
             <div class="flex flex-col">
                 <div class="rounded-xl border border-gray-200 bg-white p-6 shadow-lg">
                     <form action="prediction.php" method="post" onsubmit="showLoader()">
-                        <div class="relative mb-10 w-full flex  items-center justify-between rounded-md">
-                            <svg class="absolute left-2 block h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg"
-                                width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <circle cx="11" cy="11" r="8" class=""></circle>
-                                <line x1="21" y1="21" x2="16.65" y2="16.65" class=""></line>
-                            </svg>
-                            <input type="name" name="search"
-                                class="h-12 w-full cursor-text rounded-md border border-gray-100 bg-gray-100 py-4 pr-40 pl-12 shadow-sm outline-none focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
-                                placeholder="Search by name, type, manufacturer, etc" />
-                        </div>
-
                         <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
                             <div class="flex flex-col">
                                 <label for="name" class="text-sm font-medium text-stone-600">Stock name</label>
@@ -278,6 +266,7 @@
                     $signal_line = $prediction_data['Signal_Line'];
                     $k = $prediction_data['%K'];
                     $d = $prediction_data['%D'];
+            
 
                     // Generate buy/sell signal based on RSI
                     $rsi_latest = end($rsi);
@@ -395,6 +384,7 @@
                                 data: dData
                             }]
                         });
+
                     </script>
 
                     <?php
@@ -403,6 +393,7 @@
                 }
             }
             ?>
+            
             <table class="summary-table border-collapse w-full mt-8">
                 <thead>
                     <tr class="bg-gray-200">
@@ -413,7 +404,7 @@
                 <tbody>
                     <tr>
                         <td class="border border-gray-400 px-4 py-2">Latest Predicted Price</td>
-                        <td class="border border-gray-400 px-4 py-2"><?php echo end($predicted); ?></td>
+                        <td class="border border-gray-400 px-4 py-2"><?php end($predicted)  ?></td>
                     </tr>
                     <tr>
                         <td class="border border-gray-400 px-4 py-2">SMA (<?php echo $sma_period; ?> days)</td>
