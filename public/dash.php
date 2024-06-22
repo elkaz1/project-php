@@ -8,21 +8,30 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css">
     <style>
+        /* Hide scrollbar for WebKit browsers */
+        #settings-modal::-webkit-scrollbar,
         #Cprofile-modal::-webkit-scrollbar {
-    display: none;
-}
-
-
-        .modal-active {
-            display: flex;
-            justify-content: center;
-            align-items: start;
-        }
-
-        #settings-modal::-webkit-scrollbar {
             display: none;
         }
 
+        /* Hide scrollbar for IE, Edge, and Firefox */
+        #settings-modal,
+        #Cprofile-modal {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        /* Ensure inner container is scrollable */
+        .scrollable-container {
+            max-height: calc(100vh - 80px);
+            overflow-y: auto;
+            -ms-overflow-style: none; /* Hide scrollbar for IE and Edge */
+            scrollbar-width: none; /* Hide scrollbar for Firefox */
+        }
+
+        .scrollable-container::-webkit-scrollbar {
+            display: none; /* Hide scrollbar for WebKit browsers */
+        }
 
         .carousel-container {
             overflow: hidden;
@@ -77,63 +86,12 @@
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <script src="../js/dash.js"></script>
     <script src="../js/search.js"></script>
+
 </head>
 
 <body>
     <!-- NAV section --->
-    <nav class="flex items-center justify-between h-16 px-4 md:px-6 border-b">
-        <!-- Logo and Home Link -->
-        <a class="flex items-center gap-2" href="index.php" rel="ugc">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-6 w-6">
-                <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
-                <polyline points="9 22 9 12 15 12 15 22"></polyline>
-            </svg>
-            <span class="sr-only">Home</span>
-        </a>
-        <!-- Centered Menu Items -->
-        <div class="flex-grow flex justify-center">
-            <div class="hidden font-medium md:flex flex-row items-center gap-5 text-sm lg:gap-6">
-                <a class="font-bold" href="#" rel="ugc">
-                    Dashboard
-                </a>
-                <button data-modal-target="watchlist-modal" data-modal-toggle="watchlist-modal">
-                    <a class="text-muted-foreground focus:font-bold hover:font-bold" rel="ugc">
-                        Watchlist
-                    </a>
-                </button>
-
-                <a class="text-muted-foreground focus:font-bold hover:font-bold" rel="ugc">
-                    Transactions
-                </a>
-                <button data-modal-target="settings-modal" data-modal-toggle="settings-modal">
-                    <a class="text-muted-foreground focus:font-bold hover:font-bold" rel="ugc">
-                        Settings
-                    </a>
-                </button>
-            </div>
-        </div>
-        <!-- User Menu and Search Button -->
-        <div class="flex items-center gap-4">
-            <button data-modal-target="authentication-modal" data-modal-toggle="authentication-modal"
-                class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-accent hover:text-accent-foreground h-10 w-10">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                    class="h-6 w-6">
-                    <circle cx="11" cy="11" r="8"></circle>
-                    <path d="m21 21-4.3-4.3"></path>
-                </svg>
-                <span class="sr-only">Search</span>
-            </button>
-            <button
-                class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-accent hover:text-accent-foreground h-10 w-10"
-                type="button" id="radix-:r2:" aria-haspopup="menu" aria-expanded="false" data-state="closed">
-                <img src="../assets/preview.png" width="32" height="32" class="rounded-full" alt="Avatar"
-                    style="aspect-ratio: 32 / 32; object-fit: cover;" />
-                <span class="sr-only">Open user menu</span>
-            </button>
-        </div>
-    </nav>
+    <?php include 'navigation.php'; ?>
 
     <div class="ticker-container mt-4">
         <div class="ticker" id="ticker">
@@ -327,7 +285,7 @@
     <!-- settings section --->
     <div id="settings-modal" tabindex="-1" aria-hidden="true"
         class="hidden fixed top-[60px] inset-x-0 z-50 flex justify-center items-start overflow-hidden"
-        style="-ms-overflow-style: none; scrollbar-width: none;">
+        style="overflow-y: scroll;">
         <div class="bg-white flex flex-col gap-8 w-full max-w-4xl mx-auto p-6 md:p-10 overflow-y-auto max-h-[calc(100vh-80px)]"
             style="background-color: transparent;">
             <div class="grid gap-6">
@@ -474,7 +432,7 @@
     <!---->
     <div id="Cprofile-modal" tabindex="-1" aria-hidden="true"
         class="hidden fixed top-[60px] inset-x-0 z-50 flex justify-center items-start overflow-hidden"
-        style="-ms-overflow-style: none; scrollbar-width: none;">
+        style="overflow-y: scroll;">
         <div class="bg-white flex flex-col gap-8 w-full max-w-4xl mx-auto p-6 md:p-10 overflow-y-auto max-h-[calc(100vh-80px)]"
             style="background-color: transparent;">
             <div class="relative rounded-lg border bg-white text-gray-800 shadow-md w-full max-w-3xl mx-auto my-8 p-6"
@@ -488,6 +446,7 @@
     </div>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
+
     <div id="modal-backdrop" class="fixed inset-0 bg-black opacity-50 z-40 hidden"></div>
 
 </body>

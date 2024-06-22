@@ -36,7 +36,7 @@ $is_admin = ($row['role'] == '1');
 <body>
 
 <header class="flex h-16 w-full shrink-0 items-center  border-b bg-gray-950 text-gray-50">
-    <a class="flex items-center gap-2" href="#" rel="ugc">
+    <a class="flex items-center gap-2" href="index.php" rel="ugc">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-6 w-6">
             <path d="m8 3 4 8 5-5 5 15H2L8 3z"></path>
@@ -50,6 +50,21 @@ $is_admin = ($row['role'] == '1');
             <a class="font-medium hover:underline" href="admin_tickets.php" rel="ugc">Tickets</a>
         <?php } else { ?>
             <a class="font-medium hover:underline" href="prediction.php" rel="ugc">Stocks Predicts</a>
+            <button data-modal-target="watchlist-modal" data-modal-toggle="watchlist-modal">
+                    <a class="font-medium hover:underline" rel="ugc">
+                        Watchlist
+                    </a>
+            </button>
+            <button data-modal-target="settings-modal" data-modal-toggle="settings-modal">
+                    <a class="font-medium hover:underline" rel="ugc">
+                        Settings
+                    </a>
+                </button>
+                <button data-modal-target="authentication-modal" data-modal-toggle="authentication-modal">
+                    <a class="font-medium hover:underline" rel="ugc">
+                        Search
+                    </a>
+                </button>
         <?php } ?>
         <a class="font-medium hover:underline" href="dash.php" rel="ugc">Stocks</a>
     </nav>
@@ -64,7 +79,7 @@ $is_admin = ($row['role'] == '1');
             <span class="sr-only">Toggle user menu</span>
         </button>
         <div id="userMenu"
-            class="hidden absolute top-full right-0 mt-2 w-40 bg-white rounded-lg shadow-lg border border-gray-300">
+            class="hidden absolute top-full right-0 mt-2 w-40 bg-white rounded-lg shadow-lg border border-gray-300 z-10">
             <a href="profile" class="block px-4 py-2 text-black hover:bg-gray-200">Profile</a>
             <a href="/logout" class="block px-4 py-2 text-black hover:bg-gray-200">Logout</a>
         </div>
