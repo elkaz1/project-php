@@ -9,9 +9,9 @@
 </head>
 
 <body>
-    <?php include 'header.php'; ?>
+    <?php include 'navbar.php'; ?>
 
-    <div class="flex h-screen w-full items-center justify-center px-4 dark:bg-gray-950">
+    <div class="flex my-20 items-center justify-center px-4 dark:bg-gray-950">
         <div class="rounded-lg border bg-card text-card-foreground shadow-sm w-full max-w-md" data-v0-t="card">
             <div class="flex flex-col p-6 space-y-1 text-center">
                 <h3 class="whitespace-nowrap tracking-tight text-2xl font-bold">Welcome Back</h3>

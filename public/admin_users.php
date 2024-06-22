@@ -59,7 +59,7 @@ if (!$result) {
             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-6 w-6">
             <path d="m8 3 4 8 5-5 5 15H2L8 3z"></path>
         </svg>
-        <span class="sr-only">My angel predection</span>
+        <span class="sr-only">InvestIQ</span>
     </a>
     <nav class="ml-6 hidden md:flex gap-6">
        
@@ -86,7 +86,8 @@ if (!$result) {
         </div>
     </div>
 
-</header>    <div class="flex flex-col min-h-screen">
+</header>    
+<div class="flex flex-col min-h-screen">
         <main class="flex-1 px-6 py-8">
             <div class="flex justify-between items-center mb-6">
                 <div class="flex items-center gap-4">

@@ -7,13 +7,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>InvestIQ</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 </head>
 
 <body>
     <div class="flex flex-col min-h-[100dvh]">
         <?php include 'navbar.php'; ?>
         <main class="flex-1">
-            <section class="w-full py-6 sm:py-12 md:py-24 lg:py-32 xl:py-8">
+            <section class="w-full py-6 sm:py-12 md:py-24 lg:py-32 xl:py-8" data-aos="fade-up"  data-aos-duration="3000">
                 <div class="container px-4 md:px-6">
                     <div class="grid gap-6 lg:grid-cols-[1fr_400px] lg:gap-12 xl:grid-cols-[1fr_600px]">
                         <div class="flex flex-col justify-center space-y-4">
@@ -43,7 +44,7 @@
                     </div>
                 </div>
             </section>
-            <section class="w-full py-12 md:py-24 lg:py-32">
+            <section class="w-full py-12 md:py-24 lg:py-32" data-aos="fade-right"  data-aos-duration="1500">
                 <div class="container space-y-12 px-4 md:px-6">
                     <div class="flex flex-col items-center justify-center space-y-4 text-center">
                         <div class="space-y-2">
@@ -90,7 +91,7 @@
                     </div>
                 </div>
             </section>
-            <section class="w-full py-12 md:py-24 lg:py-32">
+            <section class="w-full py-12 md:py-24 lg:py-32" data-aos="fade-left"  data-aos-duration="1500">
                 <div class="container grid items-center gap-6 px-4 md:px-6 lg:grid-cols-2 lg:gap-10">
                     <div class="space-y-2">
                         <h2 class="text-3xl font-bold tracking-tighter md:text-4xl/tight">
@@ -113,7 +114,7 @@
                     </div>
                 </div>
             </section>
-            <section class="w-full py-12 md:py-24 lg:py-32 border-t">
+            <section class="w-full py-12 md:py-24 lg:py-32 border-t" data-aos="fade-up-right"  data-aos-duration="1500">
                 <div class="container px-4 md:px-6">
                     <div class="grid gap-10 sm:px-10 md:gap-16 md:grid-cols-2">
                         <div class="space-y-4">
@@ -159,7 +160,10 @@
             </nav>
         </footer>
     </div>
-
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init();
+    </script>
     
 </body>
 

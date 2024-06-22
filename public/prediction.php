@@ -399,46 +399,51 @@
                     echo "<p>Error fetching stock data. Please check the stock symbol and try again.</p>";
                 }
             }
+            // summary table for the prediction
+            if (!empty($predicted) && !empty($sma) && !empty($ema) && isset($rsi_latest) && !empty($macd) && !empty($signal_line) && isset($buy_sell_signal)) {
+                echo '<table class="summary-table border-collapse w-full mt-8">';
+                echo '<thead>';
+                echo '<tr class="bg-gray-200">';
+                echo '<th class="border border-gray-400 px-4 py-2 text-left">Metric</th>';
+                echo '<th class="border border-gray-400 px-4 py-2 text-left">Value</th>';
+                echo '</tr>';
+                echo '</thead>';
+                echo '<tbody>';
+                echo '<tr>';
+                echo '<td class="border border-gray-400 px-4 py-2">Latest Predicted Price</td>';
+                echo '<td class="border border-gray-400 px-4 py-2">' . end($predicted) . '</td>';
+                echo '</tr>';
+                echo '<tr>';
+                echo '<td class="border border-gray-400 px-4 py-2">SMA (' . htmlspecialchars($sma_period) . ' days)</td>';
+                echo '<td class="border border-gray-400 px-4 py-2">' . end($sma) . '</td>';
+                echo '</tr>';
+                echo '<tr>';
+                echo '<td class="border border-gray-400 px-4 py-2">EMA (' . htmlspecialchars($ema_period) . ' days)</td>';
+                echo '<td class="border border-gray-400 px-4 py-2">' . end($ema) . '</td>';
+                echo '</tr>';
+                echo '<tr>';
+                echo '<td class="border border-gray-400 px-4 py-2">RSI</td>';
+                echo '<td class="border border-gray-400 px-4 py-2">' . htmlspecialchars($rsi_latest) . '</td>';
+                echo '</tr>';
+                echo '<tr>';
+                echo '<td class="border border-gray-400 px-4 py-2">MACD</td>';
+                echo '<td class="border border-gray-400 px-4 py-2">' . end($macd) . '</td>';
+                echo '</tr>';
+                echo '<tr>';
+                echo '<td class="border border-gray-400 px-4 py-2">Signal Line</td>';
+                echo '<td class="border border-gray-400 px-4 py-2">' . end($signal_line) . '</td>';
+                echo '</tr>';
+                echo '<tr>';
+                echo '<td class="border border-gray-400 px-4 py-2">Buy/Sell Signal</td>';
+                echo '<td class="border border-gray-400 px-4 py-2">' . htmlspecialchars($buy_sell_signal) . '</td>';
+                echo '</tr>';
+                echo '</tbody>';
+                echo '</table>';
+            }
+            
             ?>
             
-            <table class="summary-table border-collapse w-full mt-8">
-                <thead>
-                    <tr class="bg-gray-200">
-                        <th class="border border-gray-400 px-4 py-2 text-left">Metric</th>
-                        <th class="border border-gray-400 px-4 py-2 text-left">Value</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td class="border border-gray-400 px-4 py-2">Latest Predicted Price</td>
-                        <td class="border border-gray-400 px-4 py-2"><?php end($predicted)  ?></td>
-                    </tr>
-                    <tr>
-                        <td class="border border-gray-400 px-4 py-2">SMA (<?php echo $sma_period; ?> days)</td>
-                        <td class="border border-gray-400 px-4 py-2"><?php echo end($sma); ?></td>
-                    </tr>
-                    <tr>
-                        <td class="border border-gray-400 px-4 py-2">EMA (<?php echo $ema_period; ?> days)</td>
-                        <td class="border border-gray-400 px-4 py-2"><?php echo end($ema); ?></td>
-                    </tr>
-                    <tr>
-                        <td class="border border-gray-400 px-4 py-2">RSI</td>
-                        <td class="border border-gray-400 px-4 py-2"><?php echo $rsi_latest; ?></td>
-                    </tr>
-                    <tr>
-                        <td class="border border-gray-400 px-4 py-2">MACD</td>
-                        <td class="border border-gray-400 px-4 py-2"><?php echo end($macd); ?></td>
-                    </tr>
-                    <tr>
-                        <td class="border border-gray-400 px-4 py-2">Signal Line</td>
-                        <td class="border border-gray-400 px-4 py-2"><?php echo end($signal_line); ?></td>
-                    </tr>
-                    <tr>
-                        <td class="border border-gray-400 px-4 py-2">Buy/Sell Signal</td>
-                        <td class="border border-gray-400 px-4 py-2"><?php echo $buy_sell_signal; ?></td>
-                    </tr>
-                </tbody>
-            </table>
+            
 
         </div>
     </div>

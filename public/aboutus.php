@@ -7,13 +7,14 @@
     <title>About Us - InvestIQ</title>
     <link rel="stylesheet" href="https://cdn.tailwindcss.com">
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.1/dist/aos.css">
 </head>
 
 <body>
     <div class="flex flex-col min-h-[100dvh]">
         <?php include 'navbar.php'; ?>
 
-        <main class="flex-1 flex items-center justify-center">
+        <main class="flex-1 flex items-center justify-center" data-aos="fade-up"  data-aos-duration="1500">
             <section class="py-6 md:py-12 lg:py-16 xl:py-20">
                 <div class="container mx-auto px-4 md:px-6">
                     <div class="text-center">
@@ -83,6 +84,10 @@
             </nav>
         </footer>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init();
+    </script>
     
 </body>
 
