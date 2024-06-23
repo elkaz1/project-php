@@ -92,7 +92,7 @@ if(isset($_POST['submit'])) {
             </div>
         </div>
         <div class="mt-4 text-center text-sm">
-            Already have an account?<!-- --> <a class="underline" href="./public/login.php">
+            Already have an account?<!-- --> <a class="underline" href="login.php">
                 Login
             </a></div>
     </div>
