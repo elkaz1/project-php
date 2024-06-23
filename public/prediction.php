@@ -164,7 +164,7 @@
 </head>
 
 <body>
-    <?php include 'navbar.php'; ?>
+    <?php include 'navigation.php'; ?>
     <div class="mx-10">
 
     <div class="overlay" id="overlay">
